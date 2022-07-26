@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_drag_animation/page/test_page.dart';
 import 'package:flutter_drag_animation/video/video_page.dart';
 import 'package:flutter_drag_animation/widgets/drag_page_route.dart';
 import 'package:video_player/video_player.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Video Play Demo'),
+      home: const HomeTest(),
     );
   }
 }
@@ -104,6 +105,36 @@ class _MyHomePageState extends State<MyHomePage> {
               child: VideoPlayer(_videoPlayerController),
             )
                 : const SizedBox(),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class HomeTest extends StatelessWidget {
+  const HomeTest({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Hero(
+        tag: "testTag",
+        child: GestureDetector(
+          onTap: (){
+            Navigator.push(
+              context,
+              DragPageRoute(
+                builder: (context) {
+                  return const TestPage();
+                },
+              ),
+            );
+          },
+          child: Container(
+            width: 200,
+            height: 200,
+            color: Colors.redAccent,
           ),
         ),
       ),
